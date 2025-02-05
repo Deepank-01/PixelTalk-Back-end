@@ -5,11 +5,11 @@ const dbconnect=require("./database/Dbconnect")
 const {cloudinaryConnect}=require("./database/Cloudnairy_config")
 const fileUpload=require("express-fileupload")
 const cors=require("cors")
-const app=express()
+// const app=express()
 const PORT=process.env.PORT || 5000
 // import
 require('dotenv').config()
-
+const{app,server}=require("./Util/server")
 const auth=require("./routes/auth")
 const message=require("./routes/Message")
 // middlewares
@@ -37,4 +37,4 @@ app.use("/api/message",message)
 dbconnect()
 // cloudnairy connect 
 cloudinaryConnect()
-app.listen(PORT,()=>console.log(`Backed runnig on port ${PORT}`))
+server.listen(PORT,()=>console.log(`Backed runnig on port ${PORT}`))

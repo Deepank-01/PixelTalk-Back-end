@@ -1,18 +1,22 @@
 const Message = require("../model/Message");
 const User = require("../model/User");
 const uploadToCloudinary = require("../Util/Cloudnairy");
+const { getOnlineuser_id, io } = require("../Util/server");
 
 
 exports.getsidebar=async(req,res)=>{
     try{
         const loggedInUserId = req.user._id;
         const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
-        res.status(200).json(filteredUsers);
+        res.status(200).json({
+            filteredUsers:filteredUsers,
+            success:true
+        });
 
     }
     catch(err){
         console.error("Error in getUsersForSidebar: ", err.message);
-    res.status(500).json({ error: "Internal server error",success:false });
+    res.status(500).json({ message: "Internal server error",success:false });
     }
 }
 exports.getmessage=async(req,res)=>{
@@ -55,7 +59,17 @@ exports.sendmessage=async(req,res)=>{
             image:image_url
         }
         const push_message=await Message.create(data)
-        // to do the socket io part 
+        
+        
+        // to do the socket io part : 
+        const reciver_socket_id=getOnlineuser_id(receiverId) // give the socket id of the receiver if online
+        if(reciver_socket_id){
+            io.to(reciver_socket_id).emit("newMessage",push_message)
+        }
+
+
+
+
         res.status(200).json({
             flag:"Send the message",
             success:true,

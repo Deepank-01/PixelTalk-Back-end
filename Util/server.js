@@ -10,8 +10,11 @@ const onlineUser={}
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-      origin: "https://pixeltalk-front-end-deepank.vercel.app", // Allow all origins (adjust for security)
-      methods: ["GET", "POST"],
+      origin: 'https://pixeltalk-front-end-deepank.vercel.app',
+      credentials: true, // Enable credentials
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      exposedHeaders: ['set-cookie']
     },
   });
 

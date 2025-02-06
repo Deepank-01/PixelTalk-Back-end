@@ -33,6 +33,7 @@ const obj={
 }
 const newUser=await User.create(obj)
 const token=TokenGeneration(newUser._id,newUser.email,newUser.fullName,res)
+newUser.token=token
 newUser.password=""
 res.status(200).json({
     message:"User enter in the Db",
@@ -85,7 +86,8 @@ exports.Login=async(req,res)=>{
         const token=TokenGeneration(user._id,user.email,user.fullName,res)
         // user={...user,password:""}
         user.password=""
-    
+        console.log(user)
+        
         res.status(200).json({
             message:"Succesfully login",
             token:token,

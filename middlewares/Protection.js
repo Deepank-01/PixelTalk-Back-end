@@ -4,7 +4,7 @@ const User = require("../model/User");
 
 const protect=async(req,res,next)=>{
     try{
-          const token=req.body.token || req.cookies.Token
+          const token=req.body.token || req.cookies.Token || req.header("Authorization").replace("Bearer ", "")
           if(!token){
             return res.status(401).json({ message: "Unauthorized - No Token Provided" });
           }
@@ -19,7 +19,9 @@ const protect=async(req,res,next)=>{
 
     }
     catch(err){
-        console.log("Error in protectRoute middleware: ", err.message);
+      const token=req.body.token || req.cookies.Token || req.header("Authorization").replace("Bearer ", "")
+        console.log("Error in protectRoute middleware: ", token);
+
         res.status(500).json({ message: "Internal server error",sucess:false});
     }
 }

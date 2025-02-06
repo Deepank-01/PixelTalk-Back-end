@@ -22,7 +22,6 @@ app.use(fileUpload({
 }));
 
 app.use(cors({
-    origin: 'http://localhost:4000',
     credentials: true, // Enable credentials
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],

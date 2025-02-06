@@ -21,13 +21,13 @@ app.use(fileUpload({
     tempFileDir : '/tmp/'
 }));
 
-app.use(cors({
-    origin: '*',
-    credentials: true, // Enable credentials
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['set-cookie']
-}));
+// app.use(cors({
+//     origin: 'http://localhost:4000',
+//     credentials: true, // Enable credentials
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     exposedHeaders: ['set-cookie']
+// }));
 
 // mounting 
 app.use("/api/auth",auth)  

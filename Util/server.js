@@ -9,10 +9,10 @@ const onlineUser={}
 //server for io conncetion
 const server = http.createServer(app);
 const io = new Server(server, {
-    // cors: {
-    //   origin: "*", // Allow all origins (adjust for security)
-    //   methods: ["GET", "POST"],
-    // },
+    cors: {
+      origin: "https://pixeltalk-front-end-deepank.vercel.app", // Allow all origins (adjust for security)
+      methods: ["GET", "POST"],
+    },
   });
 
   io.on("connection",(socket)=>{

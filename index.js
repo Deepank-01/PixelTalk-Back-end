@@ -13,6 +13,7 @@ const{app,server}=require("./Util/server")
 const auth=require("./routes/auth")
 const message=require("./routes/Message")
 // middlewares
+// used for the feature develop for the feature bracnh 
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
